@@ -1,0 +1,31 @@
+/* icon fonts */
+@font-face {
+  font-family: 'posse-icon';
+  src:
+    url('../fonts/posse-icon.ttf?bbqgr3') format('truetype'),
+    url('../fonts/posse-icon.woff?bbqgr3') format('woff'),
+    url('../fonts/posse-icon.svg?bbqgr3#posse-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: inline-block;
+}
+
+i, .icomoon-liga {
+  font-family: 'posse-icon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  -webkit-font-variant-ligatures: discretionary-ligatures;
+  font-variant-ligatures: discretionary-ligatures;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

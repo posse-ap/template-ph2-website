@@ -1,0 +1,58 @@
+// width
+$max-width: 984px;
+
+// padding
+$padding: 24px;
+$padding_sp: 16px;
+
+// color
+$color-dark: #333;
+$color-light: #fff;
+
+$color-gray-dark: #666;
+$color-gray: #adadad;
+$color-gray-light: #eee;
+$color-gray-lightest: #f6f6f6;
+
+$color-primary: #0071bc;
+$color-primary-light: #eff2f5;
+
+$color-accent: #e34e70;
+$color-accent-light: #fff2f5;
+
+// font
+$font-default: 'Noto Sans JP', sans-serif;
+$font-english: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif;
+
+$z-index: (
+  header: 1000,
+  // modal: 20
+);
+
+// media queries
+$breakPoints: (
+  "sm": (min-width: 420px),
+  "md": (min-width: 768px),
+  "lg": (min-width: 960px),
+  "xl": (min-width: 1280px)) !default;
+
+@mixin mq($breakPoint: md, $minmax: min) {
+  @if map-has-key($breakPoints, $breakPoint) {
+    @if $minmax ==min {
+      @media screen and #{inspect(map-get($breakPoints, $breakPoint))} {
+        @content;
+      }
+    }
+
+    @else {
+      @media not all and #{inspect(map-get($breakPoints, $breakPoint))} {
+        @content;
+      }
+    }
+  }
+
+  // マップ型で定義されていない値が呼び出された時はエラーを返す
+  @else {
+    @error "指定されたブレークポイントは定義されていません。"+"指定できるブレークポイントは次のとおりです。 -> #{map-keys($breakPoints)}";
+  }
+}

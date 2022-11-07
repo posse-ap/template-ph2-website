@@ -1,0 +1,9 @@
+@use '../Foundation/variables' as *;
+
+.l-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: map-get($z-index, header);
+}

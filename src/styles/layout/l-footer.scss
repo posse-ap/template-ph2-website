@@ -1,0 +1,13 @@
+@use '../Foundation/variables' as *;
+
+.l-footer {
+  border-top: solid 1px $color-gray-light;
+
+  &__inner {
+    padding: 56px 24px 32px;
+
+    @include mq(md) {
+      padding: 56px 24px 48px;
+    }
+  }
+}

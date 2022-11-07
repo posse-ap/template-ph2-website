@@ -1,0 +1,12 @@
+@use '../Foundation/variables' as *;
+
+.l-container {
+  margin: 0 auto;
+  max-width: $max-width + ($padding * 2);
+  width: 100%;
+  padding: 0 $padding_sp;
+
+  @include mq(md) {
+    padding: 0 $padding;
+  }
+}

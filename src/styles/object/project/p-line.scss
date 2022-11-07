@@ -1,0 +1,100 @@
+@use '../../foundation/variables' as *;
+
+.p-line {
+  margin-top: 64px;
+
+  @include mq(md) {
+    margin-top: 144px;
+  }
+
+  &__body {
+    background: url(../img/bg-line.jpg) center center / cover;
+    position: relative;
+    padding: 42px 24px;
+    border-radius: 28px;
+    overflow: hidden;
+
+    @include mq(md) {
+      padding: 68px;
+      border-radius: 56px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color-primary, .9);
+    }
+  }
+
+  &__body__inner {
+    position: relative;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    @include mq(md, max) {
+      flex-direction: column;
+    }
+
+    @include mq(md) {
+      gap: 8px;
+    }
+
+    .u-icon__line {
+      font-size: 40px;
+    }
+  }
+
+  &__content {
+    color: $color-gray-light;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 8px;
+    letter-spacing: 0.1em;
+
+    @include mq(md) {
+      margin-top: 16px;
+      text-align: center;
+      line-height: 1.8;
+    }
+  }
+
+  &__footer {
+    margin-top: 34px;
+    text-align: center;
+
+    @include mq(md) {
+      margin-top: 16px;
+    }
+  }
+
+  &__button {
+    display: inline-block;
+    color: $color-dark;
+    font-size: 14px;
+    line-height: 1.8;
+    letter-spacing: .1em;
+    max-width: 320px;
+    width: 100%;
+    background-color: $color-light;
+    font-weight: bold;
+    border-radius: 50px;
+    position: relative;
+    padding: 12px;
+
+    .u-icon__link {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translate(0, -50%);
+    }
+  }
+}

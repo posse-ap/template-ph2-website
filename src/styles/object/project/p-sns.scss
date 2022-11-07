@@ -1,0 +1,18 @@
+@use '../../foundation/variables' as *;
+
+.p-sns {
+  display: flex;
+  gap: 16px;
+
+  &__item__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: solid 1px $color-gray-light;
+    border-radius: 50%;
+    font-size: 24px;
+    color: $color-gray;
+  }
+}

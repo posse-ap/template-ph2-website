@@ -1,0 +1,110 @@
+@use '../../foundation/variables' as *;
+
+.p-top-hero {
+  &__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+
+    @include mq(md, max) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__body {
+    background-color: $color-primary-light;
+    border-radius: 20px;
+    padding: 20px 11px 20px 24px;
+    display: inline-block;
+    white-space: nowrap;
+    position: relative;
+    align-self: center;
+
+    @include mq(md, max) {
+      margin-top: -25px;
+    }
+
+    @include mq(md) {
+      border-radius: 24px;
+      padding: 50px 62px;
+    }
+  }
+
+  &__body__title {
+    color: $color-primary;
+    font-size: 12px;
+    line-height: 1.8;
+    font-weight: bold;
+
+    @include mq(md) {
+      font-size: 16px;
+    }
+  }
+
+  &__body__catchcopy {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 6px;
+    display: inline-block;
+    line-height: 1.5;
+
+    @include mq(md, max) {
+      br {
+        display: none;
+      }
+    }
+
+    @include mq(md) {
+      margin-top: 10px;
+      letter-spacing: .05em;
+      line-height: 1.3333;
+      font-size: 60px;
+    }
+  }
+
+  &__image {
+    max-height: 275px;
+    overflow: hidden;
+    display: block;
+
+    @include mq(md) {
+      max-height: 680px;
+      border-radius: 80px 0 0 80px;
+      margin-left: -125px;
+      margin-right: calc(50% - 50vw);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+      height: 100%;
+    }
+  }
+
+  &__scroll {
+    position: absolute;
+    left: 32px;
+    bottom: 24px;
+    font-family: $font-english;
+    font-size: 14px;
+    line-height: 1.5;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 8px;
+      background-color: #ccc;
+    }
+
+    @include mq(md, max) {
+      display: none;
+    }
+  }
+}

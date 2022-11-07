@@ -1,0 +1,9 @@
+@use '../../foundation/variables' as *;
+
+.p-quiz-hero {
+  background: url(../img/quiz/sp/bg-hero.jpg) center center / cover;
+
+  @include mq(md) {
+    background-image: url(../img/quiz/bg-hero.jpg);
+  }
+}

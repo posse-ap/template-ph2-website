@@ -1,0 +1,26 @@
+@use '../../foundation/variables' as *;
+
+.p-top-about {
+  &__body {
+    margin-top: 22px;
+    display: grid;
+    gap: 16px;
+    align-items: center;
+
+    @include mq(md) {
+      margin-top: 42px;
+      gap: 40px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__image {
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  &__content {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+}

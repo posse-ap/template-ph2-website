@@ -1,0 +1,50 @@
+/* icon fonts */
+@font-face {
+  font-display: inline-block;
+  font-family: "posse-icon";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/posse-icon.ttf?bbqgr3") format("truetype"), url("../fonts/posse-icon.woff?bbqgr3") format("woff"), url("../fonts/posse-icon.svg?bbqgr3#posse-icon") format("svg");
+}
+i, .icomoon-liga {
+  speak: never;
+  -ms-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "posse-icon" !important;
+  font-style: normal;
+  font-variant: normal;
+  font-variant-ligatures: discretionary-ligatures;
+  font-weight: normal;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: none;
+}
+
+/*
+ * <i class=".u-icon__link"></i>
+ *
+ * 上記のようにHTML内で利用することでアイコンを出力し、
+ * color, font-sizeプロパティをアイコンに適用することができる
+ */
+.u-icon__link:before {
+  content: "\e901";
+}
+.u-icon__note:before {
+  content: "\e902";
+}
+.u-icon__arrow:before {
+  content: "\e903";
+}
+.u-icon__line:before {
+  background: radial-gradient(#fff 60%, transparent 60%);
+  color: #00c300;
+  content: "\e900";
+}
+.u-icon__instagram:before {
+  content: "\ea92";
+}
+.u-icon__twitter:before {
+  content: "\ea96";
+}

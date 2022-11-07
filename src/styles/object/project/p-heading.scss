@@ -1,0 +1,32 @@
+@use '../../foundation/variables' as *;
+
+.p-heading {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.8;
+
+  @include mq(md) {
+    letter-spacing: .05em;
+    font-size: 36px;
+    line-height: 1.5;
+  }
+
+  &.-light {
+    color: $color-light;
+  }
+
+  &__caption {
+    letter-spacing: initial;
+    font-family: $font-english;
+    font-size: 14px;
+    color: $color-primary;
+    line-height: 1.8;
+    display: block;
+    margin-top: 4px;
+
+    @include mq(md) {
+      margin-top: 8px;
+    }
+  }
+}

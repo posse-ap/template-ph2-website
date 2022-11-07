@@ -1,0 +1,70 @@
+@use '../../foundation/variables' as *;
+
+.p-fixedLine {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+
+  @include mq(md, max) {
+    left: 0;
+  }
+
+  @include mq(md) {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  &__link {
+    background-color: #5FDF5B;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+
+    @include mq(md, max) {
+      justify-content: center;
+      gap: 8px;
+    }
+
+    @include mq(md) {
+      box-shadow: 4px 4px 20px rgba(#000, .15);
+      border-radius: 16px;
+      padding: 22px 20px 22px 24px;
+    }
+
+    .u-icon__line {
+      font-size: 28px;
+
+      @include mq(md) {
+        font-size: 36px;
+      }
+    }
+
+    .u-icon__link {
+      font-size: 18px;
+      color: #fff;
+
+      @include mq(md) {
+        margin-left: 35px;
+      }
+    }
+  }
+
+  &__link__text {
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    font-weight: bold;
+    line-height: 1.3;
+    text-align: left;
+    color: $color-light;
+
+    @include mq(md, max) {
+      br {
+        display: none;
+      }
+    }
+
+    @include mq(md) {
+      margin-left: 13px;
+    }
+  }
+}

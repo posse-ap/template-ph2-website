@@ -1,0 +1,15 @@
+@use '../../foundation/variables' as *;
+
+.u-sp {
+  &-hidden {
+    @include mq(md, max) {
+      display: none;
+    }
+  }
+
+  &-visible {
+    @include mq(md) {
+      display: none;
+    }
+  }
+}

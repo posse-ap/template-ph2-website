@@ -32,7 +32,7 @@ services:
     ports:
       - 3306:3306
     volumes: # mysqlのテーブルやらなんやらを保存する
-      - mysql-data:/var/lib/mysql
+      - ./docker/mysql/db:/var/lib/mysql
       - ./docker/mysql:/docker-entrypoint-initdb.d
   # PHPMyAdminサーバー
   phpmyadmin: # デフォルトのままで不都合ないのでDockerHubにあるイメージをそのまま使う

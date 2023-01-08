@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ITクイズ | POSSE はじめてのWeb制作</title>
+    <!-- CSS -->
     <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/style.css">
 </head>
@@ -54,7 +55,7 @@
             </div>
         </nav>
 
-        <div id="hamburger">
+        <form action="./index.php" method="post" id="hamburger">
             <h1>
                 <img src="./assets/img/logo.svg" alt="POSSEロゴ">
             </h1>
@@ -64,7 +65,7 @@
             <!-- <span class="inner_line" id="line2"></span> -->
             <!-- 1番下の線 -->
             <span class="inner_line" id="line3"></span>
-        </div>
+        </form>
     </header>
 
     <main>
@@ -137,7 +138,10 @@
         <div class="p_main_line">
             <div class="p_main_line_inner">
                 <div class="p_main_line_content">
-                    <h1 class="p_main_line_heading"><img src="./assets/img/icon/icon-line.svg" alt="">
+                    <h1 class="p_main_line_heading">
+                        <div class="p_main_line_back">
+                            <img src="./assets/img/icon/icon-line.svg" alt="">
+                        </div>
                         POSSE 公式LINE
                     </h1>
                     <p class = "p_main_line_paragraph">公式LINEにてご質問を随時受け付けております。<br>
@@ -175,5 +179,8 @@
             <h1>©2022 POSSE</h1>
         </section>
     </footer>
+    
+        <!-- JS -->
+        <script src="./quiz.js"></script>
 </body>
 </html>

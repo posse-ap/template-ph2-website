@@ -563,6 +563,7 @@ a{
 
 .p_main_line_heading{
   display: flex;
+  color: #fff;
 }
 
 @media screen and (max-width: 400px){

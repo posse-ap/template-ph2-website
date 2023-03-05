@@ -18,6 +18,8 @@
 </head>
 <body>
     <div class="wrapper">
+        <!-- sidebar.php読み込み -->
+        <?php require('../components/admin/sidebar.php') ?>
         <main>
             <div class="container">
                 <h1 class="admin_title">問題一覧</h1>

@@ -1,5 +1,4 @@
 <?php
-
 // db読み込み
 require('../dbconnect.php');
 
@@ -17,7 +16,7 @@ if (isset($_POST['id'])){
         $choices_stmt->bindValue(':id', $id);
         $choices_stmt->execute();
 
-        header('Location: ../../admin/index.php');
+        header('Location: ../admin/index.php');
         exit();
     }catch(Exception $e){
         echo $e->getMessage();

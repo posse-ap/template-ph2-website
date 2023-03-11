@@ -8,6 +8,7 @@ try{$dbh = new PDO($dsn, $user, $password);
 }catch(Exception $ex) {
   echo $ex->getMessage(); //例外の時にメッセージ表示
 }
+
 $questions = $dbh->query("SELECT * FROM questions")->fetchAll(PDO::FETCH_ASSOC);
 $choices = $dbh->query("SELECT * FROM choices")->fetchAll(PDO::FETCH_ASSOC);
 

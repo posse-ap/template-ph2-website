@@ -6,13 +6,16 @@ $password = 'root';
 
 $dbh = new PDO($dsn, $user, $password);
 
-// questionsテーブルを検索して、画面表示
-$sql = 'SELECT * FROM questions';
-$questions = $dbh->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-foreach ($questions as $row) {
-    print $row['id'] . ' ' ;
-    print $row['content'] . ' ' ;
-    print $row['image'] . ' ' ;
-    print $row['supplement'] . '<br>' ;
+// questionsテーブル・choicesテーブルを検索
+$questions = $dbh->query('SELECT * FROM questions')->fetchAll(PDO::FETCH_ASSOC);
+$choices = $dbh->query('SELECT * FROM choices')->fetchAll(PDO::FETCH_ASSOC);
+
+// choicesテーブルをquestionsテーブルに紐付ける
+foreach ($choices as $key => $choice) {
+    $index = array_search($choice["question_id"], array_column($questions, 'id'));
+    $questions[$index]["choices"][] = $choice;
 }
+var_dump($questions);
+
+
 ?>

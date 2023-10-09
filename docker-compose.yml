@@ -34,22 +34,5 @@ services:
     volumes: # mysqlのテーブルやらなんやらを保存する
       - ./docker/mysql/db:/var/lib/mysql
       - ./docker/mysql:/docker-entrypoint-initdb.d
-  # PHPMyAdminサーバー
-  phpmyadmin: # デフォルトのままで不都合ないのでDockerHubにあるイメージをそのまま使う
-    image: phpmyadmin/phpmyadmin:latest
-    environment:
-      PMA_HOST: 'db' # ホストはデータベースサーバーのサービス名(26行目)
-      PMA_USER: 'root' # デフォルトでログインしているユーザー(今回はルートユーザー)
-      PMA_PASSWORD: 'root' # 上記ユーザーのパスワード(今回はルートユーザーのパスワード)
-    ports: # ポートの設定(後で.envでする)
-    - 8081:80
-  # メール確認用サーバー
-  # とりあえずメールがきちんと送信できたか見たいだけなので、簡単に導入できるMailHogを使っている。
-  # 外部にメール送るにはIPアドレスの許可やらその他いろいろ面倒くさいので今回はやらない。
-  mailhog:
-    image: mailhog/mailhog
-    ports:
-      - 8025:8025
-      - 1025:1025
 volumes:
   mysql-data:

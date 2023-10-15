@@ -17,25 +17,6 @@ foreach ($questions as $qKey => $question) {
 
 ?>
 
-<?php
-
-require "dbconnect.php";
-
-$questions = $dbh->query("SELECT * FROM questions")->fetchAll(PDO::FETCH_ASSOC);
-$choices = $dbh->query("SELECT * FROM choices")->fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($questions as $qKey => $question) {
-  $question["choices"] = [];
-  foreach ($choices as $cKey => $choice) {
-    if ($choice["question_id"] == $question["id"]) {
-      $question["choices"][] = $choice;
-    }
-  }
-  $questions[$qKey] = $question;
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -58,16 +39,6 @@ foreach ($questions as $qKey => $question) {
     <div class="p-header__logo"><img src="../assets/img/logo.svg" alt="POSSE"></div>
     <button class="p-header__button" id="js-headerButton"></button>
     <div class="p-header__inner">
-      <nav class="p-header__nav">
-        <ul class="p-header__nav__list">
-          <li class="p-header__nav__item">
-            <a href="../" class="p-header__nav__item__link">POSSEとは</a>
-          </li>
-          <li class="p-header__nav__item">
-            <a href="../quiz/" class="p-header__nav__item__link">クイズ</a>
-          </li>
-        </ul>
-      </nav>
       <div class="p-header__official">
         <a href="https://line.me/R/ti/p/@651htnqp?from=page" target="_blank" rel="noopener noreferrer" class="p-header__official__link--line">
           <i class="u-icon__line"></i>
@@ -105,254 +76,50 @@ foreach ($questions as $qKey => $question) {
     <!-- /.p-hero .p-quiz-hero -->
 
     <div class="p-quiz-container l-container">
-      <section class="p-quiz-box js-quiz" data-quiz="0">
-        <div class="p-quiz-box__question">
-          <h2 class="p-quiz-box__question__title">
-            <span class="p-quiz-box__label">Q1</span>
-            <span class="p-quiz-box__question__title__text">日本のIT人材が2030年には最大どれくらい不足すると言われているでしょうか？</span>
-          </h2>
-          <figure class="p-quiz-box__question__image">
-            <img src="../assets/img/quiz/img-quiz01.png" alt="">
-          </figure>
-        </div>
-        <div class="p-quiz-box__answer">
-          <span class="p-quiz-box__label p-quiz-box__label--accent">A</span>
-          <ul class="p-quiz-box__answer__list">
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="0">
-                約28万人<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="1">
-                約79万人<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="2">
-                約183万人<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-          </ul>
-          <div class="p-quiz-box__answer__correct js-answerBox">
-            <p class="p-quiz-box__answer__correct__title js-answerTitle"></p>
-            <p class="p-quiz-box__answer__correct__content">
-              <span class="p-quiz-box__answer__correct__content__label">A</span>
-              <span class="js-answerText"></span>
-            </p>
+      <?php for ($i = 0; $i < count($questions); $i++) { ?>
+        <section class="p-quiz-box js-quiz" data-quiz="0">
+          <div class="p-quiz-box__question">
+            <h2 class="p-quiz-box__question__title">
+              <span class="p-quiz-box__label">Q<?= $i + 1 ?></span>
+              <span class="p-quiz-box__question__title__text"><?= $questions[$i]["content"]; ?></span>
+            </h2>
+            <figure class="p-quiz-box__question__image">
+              <img src="../assets/img/quiz/<?= $questions[$i]["image"]; ?>" alt="">
+            </figure>
           </div>
-        </div>
-        <cite class="p-quiz-box__note">
-          <i class="u-icon__note"></i>経済産業省 2019年3月 － IT 人材需給に関する調査
-        </cite>
-      </section>
-      <!-- ./p-quiz-box -->
+          <div class="p-quiz-box__answer">
+            <span class="p-quiz-box__label p-quiz-box__label--accent">A</span>
+            <ul class="p-quiz-box__answer__list">
 
-      <section class="p-quiz-box js-quiz" data-quiz="1">
-        <div class="p-quiz-box__question">
-          <h2 class="p-quiz-box__question__title">
-            <span class="p-quiz-box__label">Q2</span>
-            <span class="p-quiz-box__question__title__text">既存業界のビジネスと、先進的なテクノロジーを結びつけて生まれた、新しいビジネスのことをなんと言うでしょう？</span>
-          </h2>
-          <figure class="p-quiz-box__question__image">
-            <img src="../assets/img/quiz/img-quiz02.png" alt="">
-          </figure>
-        </div>
-        <div class="p-quiz-box__answer">
-          <span class="p-quiz-box__label p-quiz-box__label--accent">A</span>
-          <ul class="p-quiz-box__answer__list">
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="0">
-                INTECH<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="1">
-                BIZZTECH<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="2">
-                X-TECH<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-          </ul>
-          <div class="p-quiz-box__answer__correct js-answerBox">
-            <p class="p-quiz-box__answer__correct__title js-answerTitle"></p>
-            <p class="p-quiz-box__answer__correct__content">
-              <span class="p-quiz-box__answer__correct__content__label">A</span>
-              <span class="js-answerText"></span>
-            </p>
-          </div>
-        </div>
-      </section>
-      <!-- ./p-quiz-box -->
+              <?php foreach ($questions[$i]["choices"] as $key => $choice) { ?>
+                <li class="p-quiz-box__answer__item">
+                  <button class="p-quiz-box__answer__button js-answer" data-answer="<?= $i ?>" data-correct="<?= $choice["valid"] ?>">
+                    <?= $choice["name"] ?><i class="u-icon__arrow"></i>
+                  </button>
+                </li>
+              <?php } ?>
 
-      <section class="p-quiz-box js-quiz" data-quiz="2">
-        <div class="p-quiz-box__question">
-          <h2 class="p-quiz-box__question__title">
-            <span class="p-quiz-box__label">Q3</span>
-            <span class="p-quiz-box__question__title__text">IoTとは何の略でしょう？</span>
-          </h2>
-          <figure class="p-quiz-box__question__image">
-            <img src="../assets/img/quiz/img-quiz03.png" alt="">
-          </figure>
-        </div>
-        <div class="p-quiz-box__answer">
-          <span class="p-quiz-box__label p-quiz-box__label--accent">A</span>
-          <ul class="p-quiz-box__answer__list">
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="0">
-                Internet of Things<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="1">
-                Integrate into Technology<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="2">
-                Information on Tool<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-          </ul>
-          <div class="p-quiz-box__answer__correct js-answerBox">
-            <p class="p-quiz-box__answer__correct__title js-answerTitle"></p>
-            <p class="p-quiz-box__answer__correct__content">
-              <span class="p-quiz-box__answer__correct__content__label">A</span>
-              <span class="js-answerText"></span>
-            </p>
-          </div>
-        </div>
-      </section>
-      <!-- ./p-quiz-box -->
+              <!-- <li class="p-quiz-box__answer__item">
+                <button class="p-quiz-box__answer__button js-answer" data-answer="0">
+                  約28万人<i class="u-icon__arrow"></i>
+                </button>
+              </li> -->
 
-      <section class="p-quiz-box js-quiz" data-quiz="3">
-        <div class="p-quiz-box__question">
-          <h2 class="p-quiz-box__question__title">
-            <span class="p-quiz-box__label">Q4</span>
-            <span class="p-quiz-box__question__title__text">イギリスのコンピューター科学者であるギャビン・ウッド氏が提唱した、ブロックチェーン技術を活用した「次世代分散型インターネット」のことをなんと言うでしょう？</span>
-          </h2>
-          <figure class="p-quiz-box__question__image">
-            <img src="../assets/img/quiz/img-quiz04.png" alt="">
-          </figure>
-        </div>
-        <div class="p-quiz-box__answer">
-          <span class="p-quiz-box__label p-quiz-box__label--accent">A</span>
-          <ul class="p-quiz-box__answer__list">
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="0">
-                Society 5.0<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="1">
-                CyPhy<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="2">
-                SDGs<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-          </ul>
-          <div class="p-quiz-box__answer__correct js-answerBox">
-            <p class="p-quiz-box__answer__correct__title js-answerTitle"></p>
-            <p class="p-quiz-box__answer__correct__content">
-              <span class="p-quiz-box__answer__correct__content__label">A</span>
-              <span class="js-answerText"></span>
-            </p>
+            </ul>
+            <div class="p-quiz-box__answer__correct js-answerBox">
+              <p class="p-quiz-box__answer__correct__title js-answerTitle"></p>
+              <p class="p-quiz-box__answer__correct__content">
+                <span class="p-quiz-box__answer__correct__content__label">A</span>
+                <span class="js-answerText"></span>
+              </p>
+            </div>
           </div>
-        </div>
-        <cite class="p-quiz-box__note">
-          <i class="u-icon__note"></i>Society5.0 - 科学技術政策 - 内閣府
-        </cite>
-      </section>
-      <!-- ./p-quiz-box -->
-
-      <section class="p-quiz-box js-quiz" data-quiz="4">
-        <div class="p-quiz-box__question">
-          <h2 class="p-quiz-box__question__title">
-            <span class="p-quiz-box__label">Q5</span>
-            <span class="p-quiz-box__question__title__text">イギリスのコンピューター科学者であるギャビン・ウッド氏が提唱した、ブロックチェーン技術を活用した「次世代分散型インターネット」のことをなんと言うでしょう？</span>
-          </h2>
-          <figure class="p-quiz-box__question__image">
-            <img src="../assets/img/quiz/img-quiz05.png" alt="">
-          </figure>
-        </div>
-        <div class="p-quiz-box__answer">
-          <span class="p-quiz-box__label p-quiz-box__label--accent">A</span>
-          <ul class="p-quiz-box__answer__list">
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="0">
-                Web3.0<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="1">
-                NFT<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="2">
-                メタバース<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-          </ul>
-          <div class="p-quiz-box__answer__correct js-answerBox">
-            <p class="p-quiz-box__answer__correct__title js-answerTitle"></p>
-            <p class="p-quiz-box__answer__correct__content">
-              <span class="p-quiz-box__answer__correct__content__label">A</span>
-              <span class="js-answerText"></span>
-            </p>
-          </div>
-        </div>
-      </section>
-      <!-- ./p-quiz-box -->
-
-      <section class="p-quiz-box js-quiz" data-quiz="5">
-        <div class="p-quiz-box__question">
-          <h2 class="p-quiz-box__question__title">
-            <span class="p-quiz-box__label">Q6</span>
-            <span class="p-quiz-box__question__title__text">先進テクノロジー活用企業と出遅れた企業の収益性の差はどれくらいあると言われているでしょうか？</span>
-          </h2>
-          <figure class="p-quiz-box__question__image">
-            <img src="../assets/img/quiz/img-quiz06.png" alt="">
-          </figure>
-        </div>
-        <div class="p-quiz-box__answer">
-          <span class="p-quiz-box__label p-quiz-box__label--accent">A</span>
-          <ul class="p-quiz-box__answer__list">
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="0">
-                約2倍<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="1">
-                約5倍<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-            <li class="p-quiz-box__answer__item">
-              <button class="p-quiz-box__answer__button js-answer" data-answer="2">
-                約11倍<i class="u-icon__arrow"></i>
-              </button>
-            </li>
-          </ul>
-          <div class="p-quiz-box__answer__correct js-answerBox">
-            <p class="p-quiz-box__answer__correct__title js-answerTitle"></p>
-            <p class="p-quiz-box__answer__correct__content">
-              <span class="p-quiz-box__answer__correct__content__label">A</span>
-              <span class="js-answerText"></span>
-            </p>
-          </div>
-        </div>
-        <cite class="p-quiz-box__note">
-          <i class="u-icon__note"></i>Accenture Technology Vision 2021
-        </cite>
-      </section>
-      <!-- ./p-quiz-box -->
+          <cite class="p-quiz-box__note">
+            <i class="u-icon__note"></i>経済産業省 2019年3月 － IT 人材需給に関する調査
+          </cite>
+        </section>
+        <!-- ./p-quiz-box -->
+      <?php } ?>
     </div>
     <!-- /.l-container .p-quiz-container -->
   </main>

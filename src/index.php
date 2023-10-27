@@ -99,12 +99,6 @@ foreach ($questions as $qKey => $question) {
                 </li>
               <?php } ?>
 
-              <!-- <li class="p-quiz-box__answer__item">
-                <button class="p-quiz-box__answer__button js-answer" data-answer="0">
-                  約28万人<i class="u-icon__arrow"></i>
-                </button>
-              </li> -->
-
             </ul>
             <div class="p-quiz-box__answer__correct js-answerBox">
               <p class="p-quiz-box__answer__correct__title js-answerTitle"></p>

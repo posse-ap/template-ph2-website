@@ -1,19 +1,8 @@
 <?php
 
-require "dbconnect.php";
+require "../dbconnect.php";
 
 $questions = $dbh->query("SELECT * FROM questions")->fetchAll(PDO::FETCH_ASSOC);
-$choices = $dbh->query("SELECT * FROM choices")->fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($questions as $qKey => $question) {
-  $question["choices"] = [];
-  foreach ($choices as $cKey => $choice) {
-    if ($choice["question_id"] == $question["id"]) {
-      $question["choices"][] = $choice;
-    }
-  }
-  $questions[$qKey] = $question;
-}
 
 ?>
 
@@ -63,18 +52,6 @@ foreach ($questions as $qKey => $question) {
   </header>
   <!-- /.l-header .p-header -->
 
-
-  <main class="l-main">
-    <section class="p-hero p-quiz-hero">
-      <div class="l-container">
-        <h1 class="p-hero__title">
-          <span class="p-hero__title__label">POSSE課題</span>
-          <span class="p-hero__title__inline">ITクイズ</span>
-        </h1>
-      </div>
-    </section>
-    <!-- /.p-hero .p-quiz-hero -->
-
     <div class="p-quiz-container l-container">
       <?php for ($i = 0; $i < count($questions); $i++) { ?>
         <section class="p-quiz-box js-quiz" data-quiz="0">
@@ -83,32 +60,7 @@ foreach ($questions as $qKey => $question) {
               <span class="p-quiz-box__label">Q<?= $i + 1 ?></span>
               <span class="p-quiz-box__question__title__text"><?= $questions[$i]["content"]; ?></span>
             </h2>
-            <figure class="p-quiz-box__question__image">
-              <img src="../assets/img/quiz/<?= $questions[$i]["image"]; ?>" alt="">
-            </figure>
           </div>
-          <div class="p-quiz-box__answer">
-            <span class="p-quiz-box__label p-quiz-box__label--accent">A</span>
-            <ul class="p-quiz-box__answer__list">
-              <?php foreach ($questions[$i]["choices"] as $key => $choice) { ?>
-                <li class="p-quiz-box__answer__item">
-                  <button class="p-quiz-box__answer__button js-answer" data-answer="<?= $i ?>" data-correct="<?= $choice["valid"] ?>">
-                    <?= $choice["name"] ?><i class="u-icon__arrow"></i>
-                  </button>
-                </li>
-              <?php } ?>
-            </ul>
-            <div class="p-quiz-box__answer__correct js-answerBox">
-              <p class="p-quiz-box__answer__correct__title js-answerTitle"></p>
-              <p class="p-quiz-box__answer__correct__content">
-                <span class="p-quiz-box__answer__correct__content__label">A</span>
-                <span class="js-answerText"></span>
-              </p>
-            </div>
-          </div>
-          <cite class="p-quiz-box__note">
-            <i class="u-icon__note"></i>経済産業省 2019年3月 － IT 人材需給に関する調査
-          </cite>
         </section>
         <!-- ./p-quiz-box -->
       <?php } ?>
@@ -116,31 +68,7 @@ foreach ($questions as $qKey => $question) {
     <!-- /.l-container .p-quiz-container -->
   </main>
 
-  <div class="p-line">
-    <div class="l-container">
-      <div class="p-line__body">
-        <div class="p-line__body__inner">
-          <h2 class="p-heading -light p-line__title"><i class="u-icon__line"></i>POSSE 公式LINE</h2>
-          <div class="p-line__content">
-            <p>公式LINEにてご質問を随時受け付けております。<br>詳細やPOSSE最新情報につきましては、公式LINEにてお知らせ致しますので<br>下記ボタンより友達追加をお願いします！</p>
-          </div>
-          <div class="p-line__footer">
-            <a href="https://line.me/R/ti/p/@651htnqp?from=page" target="_blank" rel="noopener noreferrer" class="p-line__button">LINE追加<i class="u-icon__link"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- /.p-line -->
-
   <footer class="l-footer p-footer">
-    <div class="p-fixedLine">
-      <a href="https://line.me/R/ti/p/@651htnqp?from=page" target="_blank" rel="noopener noreferrer" class="p-fixedLine__link">
-        <i class="u-icon__line"></i>
-        <p class="p-fixedLine__link__text"><span class="u-sp-hidden">POSSE</span>公式LINEで<br>最新情報をGET！</p>
-        <i class="u-icon__link"></i>
-      </a>
-    </div>
     <div class="l-footer__inner">
       <div class="p-footer__siteinfo">
         <span class="p-footer__logo">

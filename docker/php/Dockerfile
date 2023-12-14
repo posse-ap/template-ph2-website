@@ -13,5 +13,11 @@ libpq-dev \
 
 # Composer2.0 install
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer self-update --2
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /composer
+ENV PATH $PATH:/composer/vendor/bin
+
+WORKDIR /work/web
 
 COPY src /usr/share/nginx/html

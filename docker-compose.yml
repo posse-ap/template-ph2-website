@@ -25,7 +25,6 @@ services:
     build: # Dockerfileで設定する
       context: .
       dockerfile: ./docker/mysql/Dockerfile
-    command: --default-authentication-plugin=mysql_native_password
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=posse

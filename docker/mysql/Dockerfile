@@ -1,19 +1,10 @@
-FROM mysql:8
+# MySQL環境 - 軽量化版
+FROM mysql:8.0.35
 
-# Oracle Linux のためのパッケージマネージャーのインストール
-USER root
-RUN microdnf install -y glibc-locale-source glibc-langpack-en
+# 環境変数設定
+ENV TZ=Asia/Tokyo
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
-# 日本語ロケールの生成と設定
-RUN localedef -i ja_JP -f UTF-8 ja_JP.UTF-8
-
-# 環境変数の設定
-ENV LANG ja_JP.UTF-8
-ENV LC_ALL ja_JP.UTF-8
-# タイムゾーン(東京)
-ENV TZ Asia/Tokyo
-# MySQLのconfigファイル(my.cnf)をコピー
-COPY ./docker/mysql/my.cnf /etc/my.cnf
-
-# キャッシュと不要なファイルの削除
-RUN microdnf clean all
+# MySQLの設定ファイルをコピー
+COPY ./docker/mysql/my.cnf /etc/mysql/conf.d/custom.cnf

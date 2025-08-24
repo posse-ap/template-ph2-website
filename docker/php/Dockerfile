@@ -3,7 +3,8 @@ RUN go get -d -v github.com/mailhog/mhsendmail \
   && cd /go/src/github.com/mailhog/mhsendmail/ \
   && GOOS=linux GOARCH=arm64 go build -o mhsendmail .
 
-FROM php:fpm-buster
+FROM php:8.3-fpm
+
 # タイムゾーン(東京)
 ENV TZ Asia/Tokyo
 # 色々パッケージとか追加(パッケージの操作管理などに使うツール類？とmysqliパッケージ)

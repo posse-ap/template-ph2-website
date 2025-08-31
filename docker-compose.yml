@@ -23,9 +23,7 @@ services:
 
   # データベースサーバー（MySQL）
   db:
-    build:
-      context: .
-      dockerfile: ./docker/mysql/Dockerfile
+    image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: posse
@@ -39,7 +37,7 @@ services:
 
   # PHPMyAdmin（データベース管理ツール）
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.2-apache
+    image: phpmyadmin/phpmyadmin:latest
     environment:
       PMA_HOST: db
       PMA_USER: root

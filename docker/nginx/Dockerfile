@@ -1,8 +1,11 @@
-FROM nginx:latest
-# タイムゾーン(東京)
-ENV TZ Asia/Tokyo
+# Nginx環境 - 軽量化版
+FROM nginx:1.25-alpine
 
-# nginxのconfigファイル(default.conf)をコピー
-COPY ./docker/nginx/*.conf /etc/nginx/conf.d/
-# このコンテナに入った時のカレントディレクトリ
+# 環境変数設定
+ENV TZ=Asia/Tokyo
+
+# 設定ファイルをコピー
+COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# 作業ディレクトリ設定
 WORKDIR /var/www/html

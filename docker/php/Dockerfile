@@ -1,23 +1,39 @@
-FROM golang:1.15 AS builder
-RUN go get -d -v github.com/mailhog/mhsendmail \
-  && cd /go/src/github.com/mailhog/mhsendmail/ \
-  && GOOS=linux GOARCH=arm64 go build -o mhsendmail .
+# PHP環境 - 軽量化版
+FROM php:8.3-fpm-alpine
 
-FROM php:fpm-buster
-# タイムゾーン(東京)
-ENV TZ Asia/Tokyo
-# 色々パッケージとか追加(パッケージの操作管理などに使うツール類？とmysqliパッケージ)
-RUN apt-get update \
-&& apt-get install -y \
-git \
-zip \
-unzip \
-vim \
-libpq-dev \
-&& docker-php-ext-install pdo_mysql pdo_pgsql mysqli
-# メール受信用のやつのSMTPサーバーとかポートなどいろいろ設定
-COPY --from=builder /go/src/github.com/mailhog/mhsendmail/mhsendmail /usr/local/bin/
-RUN chmod +x /usr/local/bin/mhsendmail \
-  && echo 'sendmail_path = "/usr/local/bin/mhsendmail --smtp-addr=mailhog:1025"' > /usr/local/etc/php/conf.d/sendmail.ini
+# タイムゾーン設定
+ENV TZ=Asia/Tokyo
 
-COPY src /usr/share/nginx/html
+# 必要最小限のパッケージをインストール
+RUN apk add --no-cache \
+    # タイムゾーン設定用
+    tzdata \
+    # MySQL接続用
+    mysql-client \
+    # MailHog用（メール送信テスト）
+    msmtp \
+    && rm -rf /var/cache/apk/*
+
+# PHP拡張機能のインストール（必要最小限）
+RUN docker-php-ext-install \
+    pdo_mysql \
+    mysqli
+
+# Composerのインストール（ライブラリ管理）
+COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
+
+# MailHog用のmsmtp設定（メール送信テスト）
+RUN echo "account mailhog" > /etc/msmtprc && \
+    echo "host mailhog" >> /etc/msmtprc && \
+    echo "port 1025" >> /etc/msmtprc && \
+    echo "account default : mailhog" >> /etc/msmtprc && \
+    echo 'sendmail_path = "/usr/bin/msmtp -t"' > /usr/local/etc/php/conf.d/sendmail.ini
+
+# エラー表示を有効化、OPcacheは無効
+RUN echo "display_errors = On" > /usr/local/etc/php/conf.d/learning.ini && \
+    echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/learning.ini && \
+    echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/learning.ini && \
+    echo "log_errors = On" >> /usr/local/etc/php/conf.d/learning.ini && \
+    echo "opcache.enable = 0" >> /usr/local/etc/php/conf.d/learning.ini
+
+WORKDIR /var/www/html

@@ -34,6 +34,11 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    # 文字化け防止：クライアントの文字セット設定を無視し、サーバー側(utf8mb4)を強制
+    # 参考: https://dev.mysql.com/doc/refman/8.0/ja/server-options.html
+    command: >
+      mysqld
+      --skip-character-set-client-handshake
 
   # PHPMyAdmin（データベース管理ツール）
   phpmyadmin:
